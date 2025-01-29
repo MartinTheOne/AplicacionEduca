@@ -3,7 +3,7 @@ import React, { useState,useEffect } from 'react';
 import { CheckCircle } from 'lucide-react';
 import notyf from '@/utils/notificacion';
 
-export default function TextToSpeech ({setDisabled}){
+function TextToSpeech ({setDisabled}){
   const [text, setText] = useState("");
   const [voices,setVoices]=useState([])
   const [voice, setVoice] = useState("default");
@@ -41,6 +41,15 @@ export default function TextToSpeech ({setDisabled}){
   
     getVoices();
   }, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [isSuccess]);
   
 
   const handleSubmit = async (e) => {
@@ -254,3 +263,5 @@ export default function TextToSpeech ({setDisabled}){
     </div>
     )
 }
+
+export default TextToSpeech;

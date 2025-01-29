@@ -26,7 +26,7 @@ export default async function uploadAudio(req, res) {
   const form = new IncomingForm({
     keepExtensions: true,
     uploadDir: "./tmp",
-    maxFileSize: 25 * 1024 * 1024,
+    maxFileSize: 10 * 1024 * 1024,
   });
 
   let currentFile = null;
@@ -52,6 +52,10 @@ export default async function uploadAudio(req, res) {
 
     const name = Array.isArray(fields.name) ? fields.name[0] : fields.name;
 
+    const noise = fields.noise == "true"
+    const description = Array.isArray(fields.description) ? fields.description[0] : " ";
+
+
 
     if (!file || !file.filepath || !name) {
       throw new Error("Campos inválidos");
@@ -69,6 +73,8 @@ export default async function uploadAudio(req, res) {
     const response = await client.voices.add({
       files: [fs.createReadStream(file.filepath)],
       name: name,
+      remove_background_noise:noise,
+      description:description
 
     });
 

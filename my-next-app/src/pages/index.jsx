@@ -2,7 +2,7 @@
 import { Waves, Sparkles, Rocket } from 'lucide-react';
 import Link from 'next/link';
 
-export default function Home() {
+function Home() {
   return (
     <div className="sm:h-[890px] h-[1000px] bg-gradient-to-b from-white to-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
@@ -63,3 +63,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;
